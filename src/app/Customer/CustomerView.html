@@ -1,0 +1,62 @@
+<form [formGroup]="CustomerModel.formCustomerGroup">
+  Customer Code : <input 
+      formControlName = "CustomerCodeControl"
+      [(ngModel)]="CustomerModel.CustomerCode" 
+      type=text placeholder="Enter your code"/>  <br>
+      
+  Customer Name : <input 
+    formControlName = "CustomerNameControl"
+    [(ngModel)]="CustomerModel.CustomerName" 
+    type=text placeholder="your name"/> <br>
+
+  Customer Amount : <input 
+    [(ngModel)]="CustomerModel.CustomerAmount" 
+      [ngModelOptions]="{standalone: true}"
+      type=text placeholder="enter amount"/> <br>
+
+  <input 
+      [disabled]="!(CustomerModel.formCustomerGroup.valid)"      
+      (click)="Add()" type="button" value="Add"/> <br>
+</form>
+
+<div 
+  *ngIf="CustomerModel.formCustomerGroup.dirty"
+  [hidden]="!(CustomerModel.
+  formCustomerGroup
+  .controls['CustomerCodeControl']
+  .hasError('pattern'))"
+  >Enter valid 4-digit Code</div> <br>
+<div
+*ngIf="CustomerModel.formCustomerGroup.dirty"
+[hidden]="!(CustomerModel.
+formCustomerGroup
+.controls['CustomerCodeControl']
+.hasError('required'))"
+  >Customer Code is required</div> <br>
+<div
+*ngIf="CustomerModel.formCustomerGroup.dirty"  
+[hidden]="!(CustomerModel.
+formCustomerGroup
+.controls['CustomerNameControl']
+.hasError('required'))"
+  >Customer Name is required</div> <br>
+
+<!-- 
+    {{CustomerModel.CustomerCode}} <br>
+    {{CustomerModel.CustomerName}} <br>
+    {{CustomerModel.CustomerAmount}} <br>  -->
+
+    <table>
+      <tr>
+        <td>Customer Code</td>
+        <td>Customer Name</td>  
+        <td>Customer Amount</td>
+      </tr>
+
+      <tr *ngFor="let cust of CustCollection">    
+        <td>{{cust.CustomerCode}}</td>
+        <td>{{cust.CustomerName}}</td>
+        <td>{{cust.CustomerAmount}}</td>
+      </tr>
+
+    </table>
